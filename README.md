@@ -13,6 +13,16 @@ This repository contains two main parts:
 ## Requirements
 - Visual Studio (2017/2019/2022) or compatible IDE that targets .NET Framework 4.8.
 - .NET Framework 4.8 developer targeting pack.
+## Third‑party libraries
+- `Bunifu.UI.WinForms` — optional third‑party WinForms UI library used by the project (v9.1.0).
+  - This project uses NuGet package `Bunifu.UI.WinForms`. If your UI projects (for example `MyPhotoControls` and `MyPhotos`) use Bunifu controls, install the package into those projects as well.
+
+## Installing Bunifu
+- In Visual Studio use __Manage NuGet Packages__ on the project and search for `Bunifu.UI.WinForms`, or open the Package Manager Console:
+  - Open __Tools > NuGet Package Manager > Package Manager Console__ and run:
+    `Install-Package Bunifu.UI.WinForms -Version 9.1.0`
+- After installation, rebuild the solution and restart Visual Studio if design-time toolbox items do not appear.
+
 
 ## Build & Run
 1. Open the solution in Visual Studio.
@@ -34,19 +44,6 @@ This repository contains two main parts:
 - Open or create an album from the UI.
 - Select a photo to view/edit metadata in `Photo Properties`.
 - Save album to persist changes (text format).
-
-## Troubleshooting
-- CS0234: "The type or namespace name 'MyPhotoAlbum' does not exist in the namespace 'Manning' (are you missing an assembly reference?)"
-  - Cause: code references `Manning.MyPhotoAlbum` while actual namespace is `MyPhotoAlbum`, or the assembly/project containing that namespace is not referenced.
-  - Fixes:
-    1. Prefer making namespaces consistent. If `MyPhotoAlbum` is the defined namespace, change usages from `using Manning.MyPhotoAlbum;` to `using MyPhotoAlbum;`, or change the namespace declarations in the `MyPhotoAlbum` project to `Manning.MyPhotoAlbum` if that is intended.
-    2. Ensure the UI project references the model project:
-       - In Solution Explorer, right‑click the UI project (e.g. `MyPhotoControls`) → __Add Reference__ → Projects → check `MyPhotoAlbum`.
-    3. If the API is in a compiled assembly, add the assembly via __Add Reference__ → Browse or Assemblies.
-    4. After changes, clean and rebuild the solution (__Build > Clean Solution__, then __Build > Rebuild Solution__).
-- Other common checks:
-  - Confirm `Copy Local` or build configuration for referenced projects.
-  - Verify there are no accidental duplicate namespaces or typographical mistakes in `using` directives.
 
 ## Tests
 - If there are unit tests, run them using Visual Studio's __Test Explorer__.
