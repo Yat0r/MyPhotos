@@ -375,6 +375,7 @@ namespace MyPhotos
         {
             menuNext.Enabled = (Manager.Index < Manager.Album.Count - 1);
             menuPrevious.Enabled = (Manager.Index > 0);
+            menuPhotoProps.Enabled = (Manager.Current != null);
         }
 
         private bool SaveAndCloseAlbum()
@@ -419,6 +420,17 @@ namespace MyPhotos
         private void pbxPhoto_MouseMove(object sender, MouseEventArgs e)
         {
             UpdatePixelDialog(e.X, e.Y);
+        }
+
+        private void menuPhotoProps_Click(object sender, EventArgs e)
+        {
+            if (Manager.Current == null)
+                return;
+            using (PhotoEditDiialog dlg = new PhotoEditDiialog(Manager))
+            {
+                if (dlg.ShowDialog() == DialogResult.OK)
+                    DisplayAlbum();
+            }
         }
     }
 }

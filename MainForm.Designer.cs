@@ -41,6 +41,7 @@
             this.menuPrevious = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.menuPixelData = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuPhotoProps = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFileNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,9 +100,10 @@
             this.menuNext,
             this.menuPrevious,
             this.toolStripSeparator7,
-            this.menuPixelData});
+            this.menuPixelData,
+            this.menuPhotoProps});
             this.ctxMenuPhoto.Name = "ctxMenuPhoto";
-            this.ctxMenuPhoto.Size = new System.Drawing.Size(196, 104);
+            this.ctxMenuPhoto.Size = new System.Drawing.Size(196, 148);
             this.ctxMenuPhoto.Opening += new System.ComponentModel.CancelEventHandler(this.ctxMenuPhoto_Opening);
             // 
             // menuImage
@@ -173,6 +175,13 @@
             this.menuPixelData.Size = new System.Drawing.Size(195, 22);
             this.menuPixelData.Text = " Pi&xel Data…";
             this.menuPixelData.Click += new System.EventHandler(this.menuPixelData_Click);
+            // 
+            // menuPhotoProps
+            // 
+            this.menuPhotoProps.Name = "menuPhotoProps";
+            this.menuPhotoProps.Size = new System.Drawing.Size(195, 22);
+            this.menuPhotoProps.Text = "Phot&o Properties…";
+            this.menuPhotoProps.Click += new System.EventHandler(this.menuPhotoProps_Click);
             // 
             // menuStrip1
             // 
@@ -486,6 +495,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuPrevious;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem menuPixelData;
+        private System.Windows.Forms.ToolStripMenuItem menuPhotoProps;
     }
 }
 
