@@ -71,6 +71,7 @@
             this.statusInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusImageSize = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusAlbumPos = new System.Windows.Forms.ToolStripStatusLabel();
+            this.menuAlbumProps = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPhoto)).BeginInit();
             this.ctxMenuPhoto.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -101,9 +102,10 @@
             this.menuPrevious,
             this.toolStripSeparator7,
             this.menuPixelData,
-            this.menuPhotoProps});
+            this.menuPhotoProps,
+            this.menuAlbumProps});
             this.ctxMenuPhoto.Name = "ctxMenuPhoto";
-            this.ctxMenuPhoto.Size = new System.Drawing.Size(196, 148);
+            this.ctxMenuPhoto.Size = new System.Drawing.Size(196, 170);
             this.ctxMenuPhoto.Opening += new System.ComponentModel.CancelEventHandler(this.ctxMenuPhoto_Opening);
             // 
             // menuImage
@@ -432,6 +434,13 @@
             this.statusAlbumPos.Size = new System.Drawing.Size(28, 19);
             this.statusAlbumPos.Text = "1/1";
             // 
+            // menuAlbumProps
+            // 
+            this.menuAlbumProps.Name = "menuAlbumProps";
+            this.menuAlbumProps.Size = new System.Drawing.Size(195, 22);
+            this.menuAlbumProps.Text = "Album Properties";
+            this.menuAlbumProps.Click += new System.EventHandler(this.menuAlbumProps_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -496,6 +505,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem menuPixelData;
         private System.Windows.Forms.ToolStripMenuItem menuPhotoProps;
+        private System.Windows.Forms.ToolStripMenuItem menuAlbumProps;
     }
 }
 

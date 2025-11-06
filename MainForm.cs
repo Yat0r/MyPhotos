@@ -376,6 +376,7 @@ namespace MyPhotos
             menuNext.Enabled = (Manager.Index < Manager.Album.Count - 1);
             menuPrevious.Enabled = (Manager.Index > 0);
             menuPhotoProps.Enabled = (Manager.Current != null);
+            menuAlbumProps.Enabled = (Manager.Album != null);
         }
 
         private bool SaveAndCloseAlbum()
@@ -427,6 +428,17 @@ namespace MyPhotos
             if (Manager.Current == null)
                 return;
             using (PhotoEditDiialog dlg = new PhotoEditDiialog(Manager))
+            {
+                if (dlg.ShowDialog() == DialogResult.OK)
+                    DisplayAlbum();
+            }
+        }
+        
+        private void menuAlbumProps_Click(object sender, EventArgs e)
+        {
+            if (Manager.Album == null)
+                return;
+            using (AlbumEditDialog dlg = new AlbumEditDialog(Manager))
             {
                 if (dlg.ShowDialog() == DialogResult.OK)
                     DisplayAlbum();
