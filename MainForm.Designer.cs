@@ -42,6 +42,7 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.menuPixelData = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPhotoProps = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuAlbumProps = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFileNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,7 +72,7 @@
             this.statusInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusImageSize = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusAlbumPos = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuAlbumProps = new System.Windows.Forms.ToolStripMenuItem();
+            this.flybyProvider = new Manning.MyPhotoControls.FlybyTextProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbxPhoto)).BeginInit();
             this.ctxMenuPhoto.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -105,7 +106,7 @@
             this.menuPhotoProps,
             this.menuAlbumProps});
             this.ctxMenuPhoto.Name = "ctxMenuPhoto";
-            this.ctxMenuPhoto.Size = new System.Drawing.Size(196, 170);
+            this.ctxMenuPhoto.Size = new System.Drawing.Size(196, 148);
             this.ctxMenuPhoto.Opening += new System.ComponentModel.CancelEventHandler(this.ctxMenuPhoto_Opening);
             // 
             // menuImage
@@ -114,6 +115,7 @@
             this.menuImageScale,
             this.menuImageStretch,
             this.menuImageActual});
+            this.flybyProvider.SetFlybyText(this.menuImage, null);
             this.menuImage.Name = "menuImage";
             this.menuImage.Size = new System.Drawing.Size(195, 22);
             this.menuImage.Text = "&Image";
@@ -124,6 +126,7 @@
             // 
             this.menuImageScale.Checked = true;
             this.menuImageScale.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.flybyProvider.SetFlybyText(this.menuImageScale, null);
             this.menuImageScale.Name = "menuImageScale";
             this.menuImageScale.Size = new System.Drawing.Size(141, 22);
             this.menuImageScale.Tag = "Zoom";
@@ -131,6 +134,7 @@
             // 
             // menuImageStretch
             // 
+            this.flybyProvider.SetFlybyText(this.menuImageStretch, null);
             this.menuImageStretch.Name = "menuImageStretch";
             this.menuImageStretch.Size = new System.Drawing.Size(141, 22);
             this.menuImageStretch.Tag = "StretchImage";
@@ -138,6 +142,7 @@
             // 
             // menuImageActual
             // 
+            this.flybyProvider.SetFlybyText(this.menuImageActual, null);
             this.menuImageActual.Name = "menuImageActual";
             this.menuImageActual.Size = new System.Drawing.Size(141, 22);
             this.menuImageActual.Tag = "Normal";
@@ -150,6 +155,7 @@
             // 
             // menuNext
             // 
+            this.flybyProvider.SetFlybyText(this.menuNext, null);
             this.menuNext.Name = "menuNext";
             this.menuNext.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.N)));
@@ -159,6 +165,7 @@
             // 
             // menuPrevious
             // 
+            this.flybyProvider.SetFlybyText(this.menuPrevious, null);
             this.menuPrevious.Name = "menuPrevious";
             this.menuPrevious.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.P)));
@@ -173,6 +180,7 @@
             // 
             // menuPixelData
             // 
+            this.flybyProvider.SetFlybyText(this.menuPixelData, null);
             this.menuPixelData.Name = "menuPixelData";
             this.menuPixelData.Size = new System.Drawing.Size(195, 22);
             this.menuPixelData.Text = " Pi&xel Data…";
@@ -180,10 +188,19 @@
             // 
             // menuPhotoProps
             // 
+            this.flybyProvider.SetFlybyText(this.menuPhotoProps, null);
             this.menuPhotoProps.Name = "menuPhotoProps";
             this.menuPhotoProps.Size = new System.Drawing.Size(195, 22);
             this.menuPhotoProps.Text = "Phot&o Properties…";
             this.menuPhotoProps.Click += new System.EventHandler(this.menuPhotoProps_Click);
+            // 
+            // menuAlbumProps
+            // 
+            this.flybyProvider.SetFlybyText(this.menuAlbumProps, null);
+            this.menuAlbumProps.Name = "menuAlbumProps";
+            this.menuAlbumProps.Size = new System.Drawing.Size(195, 22);
+            this.menuAlbumProps.Text = "Album Properties";
+            this.menuAlbumProps.Click += new System.EventHandler(this.menuAlbumProps_Click);
             // 
             // menuStrip1
             // 
@@ -213,90 +230,98 @@
             this.toolStripSeparator3,
             this.menuFileExit,
             this.toolStripSeparator1});
+            this.flybyProvider.SetFlybyText(this.menuFile, "The File Menu");
             this.menuFile.Name = "menuFile";
             this.menuFile.Size = new System.Drawing.Size(37, 20);
             this.menuFile.Text = "&File";
             // 
             // menuFileNew
             // 
+            this.flybyProvider.SetFlybyText(this.menuFileNew, null);
             this.menuFileNew.Image = ((System.Drawing.Image)(resources.GetObject("menuFileNew.Image")));
             this.menuFileNew.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.menuFileNew.Name = "menuFileNew";
             this.menuFileNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.menuFileNew.Size = new System.Drawing.Size(146, 22);
+            this.menuFileNew.Size = new System.Drawing.Size(180, 22);
             this.menuFileNew.Text = "&New";
             this.menuFileNew.Click += new System.EventHandler(this.menuFileNew_Click);
             // 
             // menuFileOpen
             // 
+            this.flybyProvider.SetFlybyText(this.menuFileOpen, null);
             this.menuFileOpen.Image = ((System.Drawing.Image)(resources.GetObject("menuFileOpen.Image")));
             this.menuFileOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.menuFileOpen.Name = "menuFileOpen";
             this.menuFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.menuFileOpen.Size = new System.Drawing.Size(146, 22);
+            this.menuFileOpen.Size = new System.Drawing.Size(180, 22);
             this.menuFileOpen.Text = "&Open";
             this.menuFileOpen.Click += new System.EventHandler(this.menuFileOpen_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(177, 6);
             // 
             // menuFileSave
             // 
+            this.flybyProvider.SetFlybyText(this.menuFileSave, null);
             this.menuFileSave.Image = ((System.Drawing.Image)(resources.GetObject("menuFileSave.Image")));
             this.menuFileSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.menuFileSave.Name = "menuFileSave";
             this.menuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.menuFileSave.Size = new System.Drawing.Size(146, 22);
+            this.menuFileSave.Size = new System.Drawing.Size(180, 22);
             this.menuFileSave.Text = "&Save";
             this.menuFileSave.Click += new System.EventHandler(this.menuFileSave_Click);
             // 
             // menuFileSaveAs
             // 
+            this.flybyProvider.SetFlybyText(this.menuFileSaveAs, null);
             this.menuFileSaveAs.Name = "menuFileSaveAs";
-            this.menuFileSaveAs.Size = new System.Drawing.Size(146, 22);
+            this.menuFileSaveAs.Size = new System.Drawing.Size(180, 22);
             this.menuFileSaveAs.Text = "Save &As";
             this.menuFileSaveAs.Click += new System.EventHandler(this.menuFileSaveAs_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // menuFilePrint
             // 
+            this.flybyProvider.SetFlybyText(this.menuFilePrint, null);
             this.menuFilePrint.Image = ((System.Drawing.Image)(resources.GetObject("menuFilePrint.Image")));
             this.menuFilePrint.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.menuFilePrint.Name = "menuFilePrint";
             this.menuFilePrint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.menuFilePrint.Size = new System.Drawing.Size(146, 22);
+            this.menuFilePrint.Size = new System.Drawing.Size(180, 22);
             this.menuFilePrint.Text = "&Print";
             // 
             // menuFilePrintPreview
             // 
+            this.flybyProvider.SetFlybyText(this.menuFilePrintPreview, null);
             this.menuFilePrintPreview.Image = ((System.Drawing.Image)(resources.GetObject("menuFilePrintPreview.Image")));
             this.menuFilePrintPreview.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.menuFilePrintPreview.Name = "menuFilePrintPreview";
-            this.menuFilePrintPreview.Size = new System.Drawing.Size(146, 22);
+            this.menuFilePrintPreview.Size = new System.Drawing.Size(180, 22);
             this.menuFilePrintPreview.Text = "Print Pre&view";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // menuFileExit
             // 
+            this.flybyProvider.SetFlybyText(this.menuFileExit, null);
             this.menuFileExit.Name = "menuFileExit";
-            this.menuFileExit.Size = new System.Drawing.Size(146, 22);
+            this.menuFileExit.Size = new System.Drawing.Size(180, 22);
             this.menuFileExit.Text = "E&xit";
             this.menuFileExit.Click += new System.EventHandler(this.menuFileExit_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // menuEdit
             // 
@@ -308,6 +333,7 @@
             this.toolStripSeparator5,
             this.menuEditAdd,
             this.menuEditRemove});
+            this.flybyProvider.SetFlybyText(this.menuEdit, null);
             this.menuEdit.Name = "menuEdit";
             this.menuEdit.Size = new System.Drawing.Size(39, 20);
             this.menuEdit.Text = "&Edit";
@@ -319,6 +345,7 @@
             // 
             // menuEditCut
             // 
+            this.flybyProvider.SetFlybyText(this.menuEditCut, null);
             this.menuEditCut.Image = ((System.Drawing.Image)(resources.GetObject("menuEditCut.Image")));
             this.menuEditCut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.menuEditCut.Name = "menuEditCut";
@@ -328,6 +355,7 @@
             // 
             // menuEditCopy
             // 
+            this.flybyProvider.SetFlybyText(this.menuEditCopy, null);
             this.menuEditCopy.Image = ((System.Drawing.Image)(resources.GetObject("menuEditCopy.Image")));
             this.menuEditCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.menuEditCopy.Name = "menuEditCopy";
@@ -337,6 +365,7 @@
             // 
             // menuEditPaste
             // 
+            this.flybyProvider.SetFlybyText(this.menuEditPaste, null);
             this.menuEditPaste.Image = ((System.Drawing.Image)(resources.GetObject("menuEditPaste.Image")));
             this.menuEditPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.menuEditPaste.Name = "menuEditPaste";
@@ -351,6 +380,7 @@
             // 
             // menuEditAdd
             // 
+            this.flybyProvider.SetFlybyText(this.menuEditAdd, null);
             this.menuEditAdd.Name = "menuEditAdd";
             this.menuEditAdd.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.A)));
@@ -360,6 +390,7 @@
             // 
             // menuEditRemove
             // 
+            this.flybyProvider.SetFlybyText(this.menuEditRemove, null);
             this.menuEditRemove.Name = "menuEditRemove";
             this.menuEditRemove.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.R)));
@@ -369,12 +400,14 @@
             // 
             // menuView
             // 
+            this.flybyProvider.SetFlybyText(this.menuView, null);
             this.menuView.Name = "menuView";
             this.menuView.Size = new System.Drawing.Size(44, 20);
             this.menuView.Text = "&View";
             // 
             // menuTools
             // 
+            this.flybyProvider.SetFlybyText(this.menuTools, null);
             this.menuTools.Name = "menuTools";
             this.menuTools.Size = new System.Drawing.Size(46, 20);
             this.menuTools.Text = "&Tools";
@@ -383,12 +416,14 @@
             // 
             this.menuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuHelpAbout});
+            this.flybyProvider.SetFlybyText(this.menuHelp, null);
             this.menuHelp.Name = "menuHelp";
             this.menuHelp.Size = new System.Drawing.Size(44, 20);
             this.menuHelp.Text = "&Help";
             // 
             // menuHelpAbout
             // 
+            this.flybyProvider.SetFlybyText(this.menuHelpAbout, null);
             this.menuHelpAbout.Name = "menuHelpAbout";
             this.menuHelpAbout.Size = new System.Drawing.Size(116, 22);
             this.menuHelpAbout.Text = "&About...";
@@ -434,12 +469,10 @@
             this.statusAlbumPos.Size = new System.Drawing.Size(28, 19);
             this.statusAlbumPos.Text = "1/1";
             // 
-            // menuAlbumProps
+            // flybyProvider
             // 
-            this.menuAlbumProps.Name = "menuAlbumProps";
-            this.menuAlbumProps.Size = new System.Drawing.Size(195, 22);
-            this.menuAlbumProps.Text = "Album Properties";
-            this.menuAlbumProps.Click += new System.EventHandler(this.menuAlbumProps_Click);
+            this.flybyProvider.CurrentStatusText = null;
+            this.flybyProvider.StatusLabel = this.statusInfo;
             // 
             // MainForm
             // 
@@ -449,9 +482,11 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.pbxPhoto);
             this.Controls.Add(this.menuStrip1);
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "MyPhotos";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbxPhoto)).EndInit();
             this.ctxMenuPhoto.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -506,6 +541,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuPixelData;
         private System.Windows.Forms.ToolStripMenuItem menuPhotoProps;
         private System.Windows.Forms.ToolStripMenuItem menuAlbumProps;
+        private Manning.MyPhotoControls.FlybyTextProvider flybyProvider;
     }
 }
 
