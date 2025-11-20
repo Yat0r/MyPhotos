@@ -11,6 +11,8 @@ namespace MyPhotos
 {
     public partial class MainForm : Form
     {
+        private const int WM_KEYDOWN = 0x100;
+
         //to hold the PixelDialogform object
         private PixelDialog _dlgPixel = null;
         private PixelDialog PixelForm
@@ -54,6 +56,7 @@ namespace MyPhotos
         {
             get { return _manager; }
             set { _manager = value; }
+
         }
 
 
@@ -74,8 +77,9 @@ namespace MyPhotos
             InitializeComponent();
             NewAlbum();
             menuView.DropDown = ctxMenuPhoto;
-
-
+            flybyProvider.SetFlybyText(
+                menuFileSave,
+                "Save the current album");
         }
         //Exit button
         private void menuFileExit_Click(object sender, EventArgs e)
@@ -186,6 +190,9 @@ namespace MyPhotos
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 string path = dlg.FileName;
+                string pwd = null;
+
+                //////////////////////////////////////////////
 
                 //Close any existing album
                 if (!SaveAndCloseAlbum())
@@ -325,9 +332,13 @@ namespace MyPhotos
             {
                 if (Manager.Album.Count > 0)
                 {
-                    string photoName = Manager.Current != null ? (string.IsNullOrEmpty(Manager.Current.Caption) ? Manager.Current.FileName : Manager.Current.Caption) : "current photo";
+                    string photoName = Manager.Current != null ? 
+                        (string.IsNullOrEmpty(Manager.Current.Caption) ? 
+                        Manager.Current.FileName : Manager.Current.Caption) : "current photo";
 
-                    string msg = string.Format("Do you want to remove the photo \"{0}\" from the album?", photoName);
+                    string msg = string.Format(
+                        "Do you want to remove the photo \"{0}\" from the album?", photoName
+                        );
                     DialogResult result = MessageBox.Show(
                         this,
                         msg,
@@ -375,6 +386,8 @@ namespace MyPhotos
         {
             menuNext.Enabled = (Manager.Index < Manager.Album.Count - 1);
             menuPrevious.Enabled = (Manager.Index > 0);
+            menuPhotoProps.Enabled = (Manager.Current != null);
+            menuAlbumProps.Enabled = (Manager.Album != null);
         }
 
         private bool SaveAndCloseAlbum()
@@ -419,6 +432,110 @@ namespace MyPhotos
         private void pbxPhoto_MouseMove(object sender, MouseEventArgs e)
         {
             UpdatePixelDialog(e.X, e.Y);
+        }
+
+        private void menuPhotoProps_Click(object sender, EventArgs e)
+        {
+            if (Manager.Current == null)
+                return;
+            using (PhotoEditDiialog dlg = new PhotoEditDiialog(Manager))
+            {
+                if (dlg.ShowDialog() == DialogResult.OK)
+                    DisplayAlbum();
+            }
+        }
+        
+        private void menuAlbumProps_Click(object sender, EventArgs e)
+        {
+            if (Manager.Album == null)
+                return;
+            using (AlbumEditDialog dlg = new AlbumEditDialog(Manager))
+            {
+                if (dlg.ShowDialog() == DialogResult.OK)
+                    DisplayAlbum();
+            }
+        }
+
+        protected override void OnKeyPress(KeyPressEventArgs e)
+        {
+            switch (e.KeyChar)
+            {
+                case '+':
+                    menuNext.PerformClick();
+                    e.Handled = true;
+                    break;
+                case '-':
+                    menuPrevious.PerformClick();
+                    e.Handled = true;
+                    break;
+            }
+            //invoke the base methods
+            base.OnKeyPress(e);
+        }
+        protected override void OnKeyDown(KeyEventArgs e)
+        {            
+            if (Manager == null)
+            {
+                base.OnKeyDown(e);
+                return;
+            }
+
+            switch (e.KeyCode)
+            {
+                case Keys.PageUp:
+                    menuPrevious.PerformClick();
+                    e.Handled = true;
+                    break;
+
+                case Keys.PageDown:
+                    menuNext.PerformClick();
+                    e.Handled = true;
+                    break;
+
+                case Keys.Home:
+                    if (Manager.Album.Count > 0)
+                    {
+                        Manager.Index = 0;
+                        DisplayAlbum();
+                    } 
+                    e.Handled = true;
+                    break;
+
+                case Keys.End:
+                    if (Manager.Album.Count > 0)
+                    {
+                        Manager.Index = Manager.Album.Count - 1;
+                        DisplayAlbum();
+                    }
+                    e.Handled = true;
+                    break;
+
+            }
+            base.OnKeyDown(e);
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if(msg.Msg == WM_KEYDOWN)
+            {
+                switch (keyData)
+                {
+                    case Keys.Tab:
+                        menuNext.PerformClick();
+                        return true;
+
+                    case Keys.Shift | Keys.Tab:
+                        menuPrevious.PerformClick();
+                        return true;
+
+                }
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
