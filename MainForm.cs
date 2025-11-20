@@ -66,7 +66,7 @@ namespace MyPhotos
             Version ver = new Version(Application.ProductVersion);
             string name = Manager.FullName;
             this.Text = String.Format(
-                "MyPhotos {0:0}.{1:0}", ver.Major, ver.Minor,
+                "MyPhotos", ver.Major, ver.Minor,
                 string.IsNullOrEmpty(name) ? "Untitled" : name
                 );
         }
@@ -193,6 +193,17 @@ namespace MyPhotos
                 string pwd = null;
 
                 //////////////////////////////////////////////
+                // GEt the password if encrypted
+                if (AlbumStorage.IsEncrypted(path))
+                {
+                    using(AlbumPasswordDialog pwdDlg = new AlbumPasswordDialog())
+                    {
+                        pwdDlg.Album = path;
+                        if (pwdDlg.ShowDialog() != DialogResult.OK)
+                            return; //open cancelled
+                        pwd = pwdDlg.Password;
+                    }
+                }
 
                 //Close any existing album
                 if (!SaveAndCloseAlbum())
@@ -202,8 +213,7 @@ namespace MyPhotos
                 try
                 {
                     //open the new album
-                    //TODO: handle invalid album file
-                    Manager = new AlbumManager(path);
+                    Manager = new AlbumManager(path, pwd);
                 }
                 catch (AlbumStorageException aex)
                 {
