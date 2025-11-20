@@ -190,6 +190,9 @@ namespace MyPhotos
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 string path = dlg.FileName;
+                string pwd = null;
+
+                //////////////////////////////////////////////
 
                 //Close any existing album
                 if (!SaveAndCloseAlbum())
