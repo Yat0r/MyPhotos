@@ -486,8 +486,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MyPhotos";
-            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Text = "MyPhotos";            
             ((System.ComponentModel.ISupportInitialize)(this.pbxPhoto)).EndInit();
             this.ctxMenuPhoto.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
